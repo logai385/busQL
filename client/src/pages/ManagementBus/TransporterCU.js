@@ -64,7 +64,7 @@ export default function TransporterCU(props) {
       );
     });
     const selectedLines = transporter.mainLines.map((line) => {
-      return line.lineNumber;
+      return line._id;
     });
     return (
       <Select
@@ -89,7 +89,7 @@ export default function TransporterCU(props) {
       );
     });
     const selectedLines = transporter.minorLines.map((line) => {
-      return line.lineNumber;
+      return line._id;
     });
     return (
       <Select

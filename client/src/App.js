@@ -18,12 +18,15 @@ import Transporters from "./pages/ManagementBus/Transporters";
 import TransporterCU from "./pages/ManagementBus/TransporterCU";
 
 
+
+
 function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   dispatch({ type: "SET_HISTORY", history: history });
   return (
     <AuthContextProvider>
+
       <Switch>
         <DashboardTemplate exact path="/dashboard" component={Dashboard} />
         
