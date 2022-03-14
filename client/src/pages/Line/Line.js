@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+// import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteLineAct, getLineListAct, setEditLineAct } from "../../redux/Actions/LineAction";
 import { Button, Space, Table, Tag } from "antd";
@@ -8,7 +8,7 @@ export default function RegisterLine() {
   // Initialize state & action
   const { lineList } = useSelector((state) => state.LineReducer);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   useEffect(() => {
     getLineList();
 
@@ -20,7 +20,7 @@ export default function RegisterLine() {
   };
   const editeLine = (line) => {
     dispatch(setEditLineAct(line));
-    history.push("/lines/edit");
+    // history.push("/lines/edit");
   }
   const delLine = (id) => {
     dispatch(deleteLineAct(id));
@@ -34,7 +34,7 @@ export default function RegisterLine() {
       status:true
     }
     dispatch(setEditLineAct(line));
-    history.push("/lines/add");
+    // history.push("/lines/add");
   }
   //render functions
   const renderLineList = () => {
@@ -115,7 +115,7 @@ export default function RegisterLine() {
       <div className="content-wrapper">
         {/* Content Header (Page header) */}
         <section className="content-header">
-          <div className="container-fluid">
+        
             <ol className="breadcrumb">
               <li className="breadcrumb-item active">Home</li>
               <li className="breadcrumb-item">
@@ -124,13 +124,13 @@ export default function RegisterLine() {
                 </Button>
               </li>
             </ol>
-          </div>
-          {/* /.container-fluid */}
+    
+        
         </section>
         {/* Main content */}
 
         <section className="content">
-          <div className="container-fluid">
+        
             <h1>Danh Sách</h1>
             <div className="row">
               <div className="col-12">
@@ -149,8 +149,8 @@ export default function RegisterLine() {
               {/* /.col */}
             </div>
             {/* /.row */}
-          </div>
-          {/* /.container-fluid */}
+    
+        
         </section>
         {/* /.content */}
       </div>

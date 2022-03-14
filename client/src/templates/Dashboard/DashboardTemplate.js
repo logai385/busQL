@@ -1,4 +1,4 @@
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import Footer from "../../components/Footers/Footer";
 import Navbar from "../../components/Headers/Navbar";
 import MainSidebar from "../../components/Sidebars/MainSidebar";
@@ -30,7 +30,7 @@ const DashboardTemplate = (props) => {
           <Footer />
 
           </div>
-        ):(<Redirect to="/login" />)
+        ):(<Navigate to="/login" />)
       }
     />
   );

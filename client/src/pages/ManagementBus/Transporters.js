@@ -1,7 +1,7 @@
 import { Button, Space, Table, Tag } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {
   DELETE_TRANSPORTER_API,
   GET_TRANSPORTER_LIST_API,
@@ -15,7 +15,7 @@ import {
 
 export default function Transporters() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const { transporterList } = useSelector((state) => state.TransporterReducer);
   useEffect(() => {
     getTransporterList();
@@ -35,7 +35,7 @@ export default function Transporters() {
       type: SET_EDITING_TRANSPORTER,
       transporter: transporter,
     });
-    history.push("/buses/edit");
+   <Navigate to="/buses/edit"/>
   };
   const handleClickADD = () => {
     dispatch({
@@ -47,7 +47,8 @@ export default function Transporters() {
         minorLines: [],
       },
     });
-    history.push("/buses/add");
+    <Navigate to="/buses/edit"/>
+
   };
   const renderTransporterList = () => {
     const columns = [

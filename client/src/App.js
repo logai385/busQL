@@ -1,8 +1,4 @@
-import {
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+// import { Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -16,42 +12,51 @@ import DashboardTemplate from "./templates/Dashboard/DashboardTemplate";
 import LineCU from "./pages/Line/LineCU";
 import Transporters from "./pages/ManagementBus/Transporters";
 import TransporterCU from "./pages/ManagementBus/TransporterCU";
-
-
-
+import Main from "./templates/main/Main";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import Dashboard from "./pages/Dashboard/Dashboard";
+// import Transporter from "./pages/Transporter/Transporter";
 
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
-  dispatch({ type: "SET_HISTORY", history: history });
+  // const history = useHistory();
+  // dispatch({ type: "SET_HISTORY", history: history });
   return (
-    <AuthContextProvider>
+    // <AuthContextProvider>
 
-      <Switch>
-        <DashboardTemplate exact path="/dashboard" component={Dashboard} />
-        
-        <DashboardTemplate exact path="/lines" component={Line} />
-        <DashboardTemplate exact path="/documents/" component={SignDocument} />
-        <DashboardTemplate exact path="/buses/" component={Transporters} />
-        <DashboardTemplate
-          exact
-          path="/documents/:action"
-          component={AddSignDocument}
-        />
-        <DashboardTemplate
-          exact
-          path="/lines/:action"
-          component={LineCU}
-        />
-         <DashboardTemplate
-          exact
-          path="/buses/:action"
-          component={TransporterCU}
-        />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Landing} />
-      </Switch>
-    </AuthContextProvider>
+    //   <Switch>
+    //     <DashboardTemplate exact path="/dashboard" component={Dashboard} />
+
+    //     <DashboardTemplate exact path="/lines" component={Line} />
+    //     <DashboardTemplate exact path="/documents/" component={SignDocument} />
+    //     <DashboardTemplate exact path="/buses/" component={Transporters} />
+    //     <DashboardTemplate
+    //       exact
+    //       path="/documents/:action"
+    //       component={AddSignDocument}
+    //     />
+    //     <DashboardTemplate
+    //       exact
+    //       path="/lines/:action"
+    //       component={LineCU}
+    //     />
+    //      <DashboardTemplate
+    //       exact
+    //       path="/buses/:action"
+    //       component={TransporterCU}
+    //     />
+    //     <Route exact path="/login" component={Login} />
+    //     <Route exact path="/" component={Landing} />
+    //   </Switch>
+    // </AuthContextProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />}>
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Transporter" element={<Transporters />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

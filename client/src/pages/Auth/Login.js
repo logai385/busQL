@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+// import { Redirect, useHistory } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import { Spinner } from "react-bootstrap";
 export default function Login() {
   const { loginUser } = useContext(AuthContext);
-  const history = useHistory();
+  // const history = useHistory();
 
   const [userForm, setUserForm] = useState({
     username: "",
@@ -19,7 +20,7 @@ export default function Login() {
       const loginData = await loginUser(userForm);
 
       if (loginData.success) {
-        history.push("/dashboard");
+        return <Navigate to="/dashboard" />;
       } else {
         return null;
       }
@@ -38,7 +39,7 @@ export default function Login() {
       </div>
     );
   } else if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Navigate to="/dashboard" />;
   } else
     return (
       <section className="login">
