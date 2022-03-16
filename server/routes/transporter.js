@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const transporter = require("../model/Transporter");
-// @route GET api/qlnv/transporters
+// @route GET api/transporters
 // @desc Get all transporters
 // @access Public
 router.get("/", async (req, res) => {
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ success: false, message: "server error" });
   }
 });
-// @route POST api/qlnv/transporters
+// @route POST api/transporters
 // @desc Create a new transporter
 // @access Public
 router.post("/", async (req, res) => {
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//@route Delete api/qlnv/transporters/plate/:plate
+//@route Delete api/transporters/plate/:plate
 //@desc Delete a transporter
 //@access Public
 router.delete("/:id", async (req, res) => {
@@ -67,7 +67,7 @@ router.delete("/:id", async (req, res) => {
     return res.status(500).json({ success: false, message: "server error" });
   }
 });
-//@route PUT api/qlnv/transporters
+//@route PUT api/transporters
 //@desc Update a transporter
 //@access Public
 router.put("/", async (req, res) => {

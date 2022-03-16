@@ -10,6 +10,10 @@ const LineSchema = new Schema({
     description:{
         type: String,        
     },
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: "users",
+    },
     status:Boolean,
 });
 LineSchema.pre('remove', function(next) {

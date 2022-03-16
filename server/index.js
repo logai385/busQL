@@ -30,7 +30,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/lines", lineRoute);
-app.use("/api/qlnv/transporters", transporterRoute);
+app.use("/api/transporters", transporterRoute);
 app.use("/api/sign/", signlineRoute);
 
 const PORT = process.env.PORT || 5000;

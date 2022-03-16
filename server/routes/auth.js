@@ -5,9 +5,36 @@ const jwt = require("jsonwebtoken");
 const verifyToken = require("../middleware/auth");
 const User = require("../model/User");
 
+// @route GET api/auth/users
+// @desc verify token
+// @access private
+router.get("/users", verifyToken, async (req, res) => {
+  try {
+    const admin = await User.findOne({ id : req.userId });
+    console.log(admin);
+    if (admin.role === "ADMINISTATOR") {
+      const role = "OPERATOR";
+      const users = await User.find({role:role}).select("-password");
+      if (!users)
+        return res
+          .status(400)
+          .json({ success: false, message: "User not found" });
+      res.json({ success: true, users});
+    }
+    else{
+      return res
+        .status(403)
+        .json({ success: false, message: "Access denied" });
+    }
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ success: false, message: "server error" });
+  }
+});
+
 // @route GET api/auth
 // @desc verify token
-// @access Public
+// @access private
 router.get("/", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
@@ -26,7 +53,7 @@ router.get("/", verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password,role } = req.body;
   // Simple validation
   if (!username || !password) {
     return res
@@ -44,6 +71,7 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
       username,
       password: hastPassword,
+      role:role||"OPERATOR"
     });
     await newUser.save();
 
@@ -101,8 +129,5 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  res.send("Hello from Auth");
-});
 
 module.exports = router;

@@ -3,9 +3,42 @@ Content-Type: application/json
 
 
 {
-    "username": "admin",
-    "password": "7604129",
-    "role":"ADMINISTATOR"
+    "username": "giamsat1",
+    "password": "123456",
+    "role": "SUPERVISOR"
 }
     // {
     //     "email": "
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+
+{
+    "username": "nhanvien2",
+    "password": "123456"
+}
+
+
+###
+GET http://localhost:5000/api/auth/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjMxZWI3MDVlOGM1ZWZmN2ZkODA3YjQiLCJpYXQiOjE2NDc0Mzg4MDZ9.AoLMUJlzFwMLJdZ3Gkmp7V-z6fUr3YXCmuENlAZ8358
+
+
+###
+POST http://localhost:5000/api/lines
+Content-Type: application/json
+
+
+{
+    "lineNumber": 21,
+    "description": "line1",
+    "status": true,
+    "user":"6231ebaa5e8c5eff7fd807ba"
+}
+
+
+###
+GET http://localhost:5000/api/lines/getlinebyuser 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjMxZWJhYTVlOGM1ZWZmN2ZkODA3YmEiLCJpYXQiOjE2NDc0Mzk5Mjl9.-rsoF_uUe_hLW46VfUK7Hx35Jn_YuW68tIXQ-junI7A
