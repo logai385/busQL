@@ -10,9 +10,9 @@ const User = require("../model/User");
 // @access private
 router.get("/users", verifyToken, async (req, res) => {
   try {
-    const admin = await User.findOne({ id : req.userId });
-    console.log(admin);
-    if (admin.role === "ADMINISTATOR") {
+    const admin = await User.findById(req.userId);
+    
+    if (admin && admin.role === "ADMINISTATOR") {
       const role = "OPERATOR";
       const users = await User.find({role:role}).select("-password");
       if (!users)
