@@ -45,8 +45,8 @@ export default function Login() {
       <section className="login">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-5 login__left"></div>
-            <div className="col-7">
+            <div className="col-md-5 login__left"></div>
+            <div className="col-12 col-md-7">
               <div className="login__right">
                 <form className="form " onSubmit={handleSubmit}>
                   <h1 className="text-center display-3">Login</h1>
