@@ -42,3 +42,10 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/lines/getlinebyuser 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjMxZWJhYTVlOGM1ZWZmN2ZkODA3YmEiLCJpYXQiOjE2NDc0Mzk5Mjl9.-rsoF_uUe_hLW46VfUK7Hx35Jn_YuW68tIXQ-junI7A
+
+###
+GET http://localhost:5000/api/lines
+
+
+###
+GET http://localhost:5000/api/transporters/getbyline/6232114cf7a0ffd6a4caabbb

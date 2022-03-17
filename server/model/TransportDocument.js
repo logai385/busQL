@@ -12,6 +12,9 @@ const TransportDocumentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "lines",
   },
+  quantity: {
+    type: Number,    
+  },
   documentImg:{
     type:String,
   },

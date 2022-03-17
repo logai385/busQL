@@ -53,11 +53,12 @@ router.post("/documents",upload.single("documentImg") ,async (req, res) => {
 
   try {
     
-    let { dateSign, transporter,line } = req.body;
-    // console.log(req.body);
-    // console.log(req.file);
+    let { dateSign, transporter,line,quantity } = req.body;
+ 
+    
     let documentImg = req.file?.originalname;
     //Simple validation
+    console.log(dateSign, transporter,line,quantity,documentImg);
     if ( !documentImg || !dateSign || !transporter||!line) {
       return res.status(200).json({
         success: false,
@@ -68,6 +69,7 @@ router.post("/documents",upload.single("documentImg") ,async (req, res) => {
       dateSign,
       transporter,
       line,
+      quantity,
       documentImg:documentImg,
     });
     await newDocument.save();
