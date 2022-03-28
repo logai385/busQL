@@ -3,9 +3,9 @@ Content-Type: application/json
 
 
 {
-    "username": "admin",
-    "password": "760412",
-    "role": "ADMINISTRATOR"
+    "username": "Nhanvien2",
+    "password": "123456",
+    "role": "OPERATOR"
 }
     // {
     //     "email": "

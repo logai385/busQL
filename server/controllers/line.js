@@ -76,7 +76,7 @@ export const updateLine = async (req, res) => {
         .status(NOT_FOUND)
         .json({message: "line not found" });
     }
-    return res.status(CREATED).json(updateLine);
+    return res.status(OK).json(updateLine);
   } catch (error) {
     console.log(error.message);
     return res.status(CONFLICT).json({message: error.message });
