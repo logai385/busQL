@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { ROLE } = require("../utils/systemSettings");
+import mongoose from "mongoose";
+import { ROLE } from "../utils/systemSettings.js";
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -21,11 +21,6 @@ const UserSchema = new Schema({
     default: Date.now,
   },
 });
-UserSchema.set("toObject", {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-  },
-});
-module.exports = mongoose.model("users", UserSchema);
+
+const User = mongoose.model("User", UserSchema);
+export default User;

@@ -1,4 +1,5 @@
-import { STATUS_CODE } from "../utils/systemSettings";
+import { STATUS_CODE } from "../utils/systemSettings.js";
+
 const {
   NO_CONTENT,
   OK,
@@ -8,7 +9,7 @@ const {
   CREATED,
   INTERNAL_SERVER_ERROR,
 } = STATUS_CODE;
-const TransportDocument = require("../model/TransportDocument");
+import TransportDocument from "../model/TransportDocument.js";
 
 export const getAllDocument = async (req, res) => {
   try {

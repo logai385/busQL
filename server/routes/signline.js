@@ -1,9 +1,8 @@
-const express = require("express");
+import express from "express";
+import multer from "multer";
+import { getAllDocument, deleteDocument, createDocument } from "../controllers/signLine.js";
+
 const router = express.Router();
-
-const multer = require("multer");
-const { getAllDocument, deleteDocument, createDocument } = require("../controllers/signLine");
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/");
@@ -29,4 +28,4 @@ router.delete("/:id", deleteDocument);
 //@access Public
 router.post("/", upload.single("documentImg"), createDocument);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,5 @@
-import { ROLE, STATUS_CODE } from "../utils/systemSettings";
+import { STATUS_CODE,ROLE } from "../utils/systemSettings.js";
+
 const {
   NO_CONTENT,
   OK,
@@ -10,8 +11,9 @@ const {
   UNAUTHORIZED,
 } = STATUS_CODE;
 const { ADMINISTRATOR, OPERATOR } = ROLE;
-const User = require("../model/User");
-
+import User from "../model/User.js";
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
 export const getAllUser = async (req, res) => {
   try {
     const admin = await User.findById(req.userId);

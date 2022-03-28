@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 const TransportDocumentSchema = new Schema({  
   dateSign: {
@@ -29,11 +30,6 @@ TransportDocumentSchema.index(
     unique: true,
   }
 );
-TransportDocumentSchema.set("toObject", {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-  },
-});
-module.exports = mongoose.model("transportDocuments", TransportDocumentSchema);
+
+const TransportDocument = mongoose.model("TransportDocument", TransportDocumentSchema);
+export default TransportDocument;

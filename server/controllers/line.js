@@ -1,7 +1,7 @@
-import { STATUS_CODE } from "../utils/systemSettings";
+import { STATUS_CODE } from "../utils/systemSettings.js";
 const { NO_CONTENT, OK, NOT_FOUND, BAD_REQUEST,CONFLICT,CREATED, INTERNAL_SERVER_ERROR } = STATUS_CODE;
 
-const line = require("../model/Line");
+import  line from "../model/Line.js";
 export const getLineByUser = async (req, res) => {
   try {
     // get all line by user

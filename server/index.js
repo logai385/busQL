@@ -1,13 +1,15 @@
-const express = require("express");
-const mongoose = require("mongoose");
-require("dotenv").config();
-const authRouter = require("./routes/auth");
-const postRouter = require("./routes/post");
-const cors = require("cors");
-const lineRoute = require("./routes/line");
-const transporterRoute = require("./routes/transporter");
-const signlineRoute = require("./routes/signline");
-const path = require('path')
+import express  from "express";
+import 'dotenv/config' 
+import path from 'path';
+import cors from "cors";
+import mongoose from "mongoose";
+
+//Import Routes
+import authRouter from "./routes/auth.js";
+import lineRoute from "./routes/line.js";
+import transporterRoute from "./routes/transporter.js";
+import signlineRoute from "./routes/signline.js";
+// connect to db
 const connectDB = async () => {
   try {
     await mongoose.connect(
@@ -21,6 +23,7 @@ const connectDB = async () => {
   }
 };
 connectDB();
+const __dirname = path.resolve();
 
 const app = express();
 app.use('/static', express.static(path.join(__dirname, 'public')))

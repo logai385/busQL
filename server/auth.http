@@ -3,9 +3,9 @@ Content-Type: application/json
 
 
 {
-    "username": "giamsat1",
-    "password": "123456",
-    "role": "SUPERVISOR"
+    "username": "admin",
+    "password": "760412",
+    "role": "ADMINISTRATOR"
 }
     // {
     //     "email": "
@@ -16,14 +16,18 @@ Content-Type: application/json
 
 
 {
-    "username": "nhanvien2",
-    "password": "123456"
+    "username": "admin",
+    "password": "760412"
 }
 
 
 ###
 GET http://localhost:5000/api/auth/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjMxZWI3MDVlOGM1ZWZmN2ZkODA3YjQiLCJpYXQiOjE2NDc0Mzg4MDZ9.AoLMUJlzFwMLJdZ3Gkmp7V-z6fUr3YXCmuENlAZ8358
+
+###
+GET http://localhost:5000/api/auth/verify
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQxYzY4NmU3YTBjNWM5YTk3ZjdiNDgiLCJpYXQiOjE2NDg0Nzc4NzF9.v_gxLBXCSnZQLJxWlkq0qPe3T3q3QhH-dGwS7st72LAq
 
 
 ###

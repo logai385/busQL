@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 const TransporterUnitSchema = new Schema({
     name:{
@@ -6,11 +7,6 @@ const TransporterUnitSchema = new Schema({
         required: true,
     }
 });
-TransporterUnitSchema.set("toObject", {
-    transform: function (doc, ret) {
-      ret.id = ret._id;
-      delete ret._id;
-      delete ret.__v;
-    },
-  });
-module.exports = mongoose.model("transporterUnits", TransporterUnitSchema);
+
+const TransporterUnit = mongoose.model("TransporterUnit", TransporterUnitSchema);
+export default TransporterUnit;

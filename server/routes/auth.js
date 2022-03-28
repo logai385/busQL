@@ -1,10 +1,9 @@
-const express = require("express");
+import express from "express";
+
+import verifyToken from "../middleware/auth.js";
+
+import  { getAllUser, verifyUser, login, register } from "../controllers/auth.js";
 const router = express.Router();
-const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
-const verifyToken = require("../middleware/auth");
-const User = require("../model/User");
-const { getAllUser, verifyUser, login, register } = require("../controllers/auth");
 
 // @route GET api/auth/users
 // @desc verify token
@@ -26,4 +25,4 @@ router.post("/register",register);
 router.post("/login", login);
 
 
-module.exports = router;
+export default router;

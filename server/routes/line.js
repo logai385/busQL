@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const verifyTonken = require("../middleware/auth");
+import verifyTonken from "../middleware/auth.js";
 
-const { getLineByUser, getAllLine, createLine, updateLine, deleteLine } = require("../controllers/line");
+import { getLineByUser, getAllLine, createLine, updateLine, deleteLine } from "../controllers/line.js";
 
 // @route GET api/lines
 // @desc Get all lines by user
@@ -30,4 +30,4 @@ router.put("/", updateLine);
 // @access Public
 router.delete("/:id", deleteLine);
 
-module.exports = router;
+export default router;

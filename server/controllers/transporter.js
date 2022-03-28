@@ -1,4 +1,4 @@
-import { STATUS_CODE } from "../utils/systemSettings";
+import { STATUS_CODE } from "../utils/systemSettings.js";
 const {
   NO_CONTENT,
   OK,
@@ -8,7 +8,7 @@ const {
   CREATED,
   INTERNAL_SERVER_ERROR,
 } = STATUS_CODE;
-const transporter = require("../model/Transporter");
+import transporter from "../model/Transporter.js";
 
 export const getTransporterByLine = async (req, res) => {
   try {

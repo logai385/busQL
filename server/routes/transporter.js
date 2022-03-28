@@ -1,6 +1,7 @@
-const express = require("express");
-const { getAllTransporter, getTransporterByLine, createTranporter, deleteTransporter, updateTransporter } = require("../controllers/transporter");
+import express from "express";
 const router = express.Router();
+
+import { getAllTransporter, getTransporterByLine, createTranporter, deleteTransporter, updateTransporter } from "../controllers/transporter.js";
 
 // @route GET api/transporters
 // @desc Get all transporters
@@ -24,4 +25,4 @@ router.delete("/:id",deleteTransporter);
 //@access Public
 router.put("/", updateTransporter);
 
-module.exports = router;
+export default router;

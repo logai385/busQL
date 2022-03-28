@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 const TransporterSchema = new Schema({
   plate: {
@@ -24,11 +25,6 @@ TransporterSchema.pre('remove', function(next) {
   transportDocuments.remove({transporter: this._id}).exec();    
   next();
 });
-TransporterSchema.set("toObject", {
-  transform: function (doc, ret) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-  },
-});
-module.exports = mongoose.model("transporters", TransporterSchema);
+
+const Transporter = mongoose.model("Transporter", TransporterSchema);
+export default Transporter;
