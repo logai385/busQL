@@ -4,130 +4,26 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("../middleware/auth");
 const User = require("../model/User");
+const { getAllUser, verifyUser, login, register } = require("../controllers/auth");
 
 // @route GET api/auth/users
 // @desc verify token
 // @access private
-router.get("/users", verifyToken, async (req, res) => {
-  try {
-    const admin = await User.findById(req.userId);
-    
-    if (admin && admin.role === "ADMINISTATOR") {
-      const role = "OPERATOR";
-      const users = await User.find({role:role}).select("-password");
-      if (!users)
-        return res
-          .status(400)
-          .json({ success: false, message: "User not found" });
-      res.json({ success: true, users});
-    }
-    else{
-      return res
-        .status(403)
-        .json({ success: false, message: "Access denied" });
-    }
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ success: false, message: "server error" });
-  }
-});
+router.get("/users", verifyToken, getAllUser);
 
 // @route GET api/auth
 // @desc verify token
 // @access private
-router.get("/", verifyToken, async (req, res) => {
-  try {
-    const user = await User.findById(req.userId).select("-password");
-    if (!user)
-      return res
-        .status(400)
-        .json({ success: false, message: "User not found" });
-    res.json({ success: true, user });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ success: false, message: "server error" });
-  }
-});
+router.get("/verify", verifyToken, verifyUser);
 
 // @route POST api/auth/register
 // @desc Register user
 // @access Public
-router.post("/register", async (req, res) => {
-  const { username, password,role } = req.body;
-  // Simple validation
-  if (!username || !password) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Please enter all fields" });
-  }
-  try {
-    const user = await User.findOne({ username });
-    if (user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User already exists" });
-    }
-    const hastPassword = await argon2.hash(password);
-    const newUser = new User({
-      username,
-      password: hastPassword,
-      role:role||"OPERATOR"
-    });
-    await newUser.save();
-
-    // Generate token
-    const accessToken = jwt.sign(
-      { userId: newUser._id },
-      process.env.JWT_SECRET
-    );
-    res.status(200).json({
-      success: true,
-      message: "User created successfully",
-      accessToken,
-    });
-  } catch (err) {
-    return res.status(500).json({ success: false, message: "server error" });
-  }
-});
+router.post("/register",register);
 // @route POST api/auth/login
 // @desc Login user and return JWT token
 // @access Public
-router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
-  // Simple validation
-  if (!username || !password) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Please enter all fields" });
-  }
-  try {
-    // Check for existing user
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Incorrect user or password" });
-    }
-    // Validate password
-    const validPassword = await argon2.verify(user.password, password);
-    if (!validPassword) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Incorrect user or password" });
-    }
-    // Generate token
-    const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-
-    res.json({
-      success: true,
-      message: "User logged in successfully",
-      accessToken,
-    });
-  } catch (err) {
-    return res.status(500).json({ success: false, message: "server error" });
-  }
-});
+router.post("/login", login);
 
 
 module.exports = router;

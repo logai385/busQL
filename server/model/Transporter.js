@@ -24,4 +24,11 @@ TransporterSchema.pre('remove', function(next) {
   transportDocuments.remove({transporter: this._id}).exec();    
   next();
 });
+TransporterSchema.set("toObject", {
+  transform: function (doc, ret) {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+  },
+});
 module.exports = mongoose.model("transporters", TransporterSchema);

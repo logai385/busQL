@@ -28,10 +28,9 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
-app.use("/api/posts", postRouter);
 app.use("/api/lines", lineRoute);
 app.use("/api/transporters", transporterRoute);
-app.use("/api/sign/", signlineRoute);
+app.use("/api/documents", signlineRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

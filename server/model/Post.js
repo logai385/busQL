@@ -20,4 +20,5 @@ const PostSchema = new Schema({
     ref: "users",
   },
 });
+
 module.exports = mongoose.model("posts", PostSchema);
