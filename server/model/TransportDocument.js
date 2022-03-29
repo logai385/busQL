@@ -16,6 +16,9 @@ const TransportDocumentSchema = new Schema({
   quantity: {
     type: Number,    
   },
+  missQuantity: {
+    type: Number,    
+  },
   documentImg:{
     type:[String],
   },

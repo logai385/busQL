@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { getAllDocument, deleteDocument, createDocument } from "../controllers/signLine.js";
+import path from 'path';
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -8,7 +9,7 @@ const storage = multer.diskStorage({
     cb(null, "./public/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   },
 });
 // const storage = multer.diskStorage({
@@ -34,6 +35,6 @@ router.delete("/:id", deleteDocument);
 //@route POST api/sign/documents
 //@desc Create a new document
 //@access Public
-router.post("/", upload.array("documentImg",2), createDocument);
+router.post("/", upload.array("documentImg"), createDocument);
 
 export default router;

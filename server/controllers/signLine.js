@@ -43,11 +43,9 @@ export const deleteDocument = async (req, res) => {
 };
 export const createDocument = async (req, res) => {
   try {
+    const documentImg = req.files?.map((file) => file.filename);
     let { dateSign, transporter, line, quantity } = req.body;
 
-    // let documentImg = req.file?.originalname;
-    console.log(req.files);
-    // console.log(req.file);
     //Simple validation
 
     if (!documentImg || !dateSign || !transporter || !line) {
@@ -66,6 +64,6 @@ export const createDocument = async (req, res) => {
     res.status(CREATED).json(newDocument);
   } catch (error) {
     console.error(error.message);
-    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
