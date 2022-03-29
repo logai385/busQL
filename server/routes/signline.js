@@ -8,9 +8,17 @@ const storage = multer.diskStorage({
     cb(null, "./public/");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   },
 });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./public/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
 const upload = multer({ storage: storage });
 
 //@route GET api/sign/documents
@@ -26,6 +34,6 @@ router.delete("/:id", deleteDocument);
 //@route POST api/sign/documents
 //@desc Create a new document
 //@access Public
-router.post("/", upload.single("documentImg"), createDocument);
+router.post("/", upload.array("documentImg",2), createDocument);
 
 export default router;

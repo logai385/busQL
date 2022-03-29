@@ -45,7 +45,8 @@ export const createDocument = async (req, res) => {
   try {
     let { dateSign, transporter, line, quantity } = req.body;
 
-    let documentImg = req.file?.originalname;
+    // let documentImg = req.file?.originalname;
+    console.log(req.files);
     // console.log(req.file);
     //Simple validation
 
