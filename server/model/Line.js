@@ -12,7 +12,11 @@ const LineSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
+  },
+  unit:{
+    type: Schema.Types.ObjectId,
+    ref: "TransporterUnit",
   },
   status: Boolean,
 });

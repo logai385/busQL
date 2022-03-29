@@ -7,17 +7,17 @@ const TransportDocumentSchema = new Schema({
   },
   transporter: {
     type: Schema.Types.ObjectId,
-    ref: "transporters",
+    ref: "Transporter",
   },
   line:{
     type: Schema.Types.ObjectId,
-    ref: "lines",
+    ref: "Line",
   },
   quantity: {
     type: Number,    
   },
   documentImg:{
-    type:String,
+    type:[String],
   },
 });
 

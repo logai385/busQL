@@ -23,7 +23,7 @@ export const getAllUser = async (req, res) => {
       const users = await User.find({ role: role }).select("-password");
       if (!users)
         return res.status(NOT_FOUND).json({ message: "User not found" });
-      res.status(OK).json({ users });
+      res.status(OK).json(users);
     } else {
       return res.status(UNAUTHORIZED).json({ message: "Access denied" });
     }
@@ -39,7 +39,7 @@ export const verifyUser = async (req, res) => {
     res.status(OK).json(user);
   } catch (error) {
     console.error(error.message);
-    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 export const login = async (req, res) => {
@@ -71,9 +71,9 @@ export const login = async (req, res) => {
       message: "User logged in successfully",
       accessToken,
     });
-  } catch (err) {
+  } catch (error) {
     console.error(error.message);
-    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 export const register = async (req, res) => {
@@ -108,8 +108,8 @@ export const register = async (req, res) => {
       message: "User created successfully",
       accessToken,
     });
-  } catch (err) {
+  } catch (error) {
     console.error(error.message);
-    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };

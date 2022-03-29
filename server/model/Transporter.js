@@ -9,13 +9,13 @@ const TransporterSchema = new Schema({
   mainLines: [
     {
       type: Schema.Types.ObjectId,
-      ref: "lines",
+      ref: "Line",
     },
   ],
   minorLines: [
     {
       type: Schema.Types.ObjectId,
-      ref: "lines",
+      ref: "Line",
     },
   ],
 });

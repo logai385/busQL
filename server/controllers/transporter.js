@@ -33,7 +33,7 @@ export const getAllTransporter = async (req, res) => {
     const transporters = await transporter
       .find()
       .populate(["mainLines", "minorLines"]);
-    res.status(OK).json({ transporters });
+    res.status(OK).json(transporters);
   } catch (err) {
     console.error(err.message);
     res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
