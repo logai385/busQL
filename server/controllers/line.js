@@ -46,7 +46,7 @@ export const getLineByUser = async (req, res) => {
 export const getAllLine = async (req, res) => {
   try {
     // get all line
-    const lines = await Line.find().populate("user", ["username", "name"]);
+    const lines = await Line.find().populate("user unit", ["username", "name"]);
     if (!lines)
       return res.status(NOT_FOUND).json({ message: "Line not found" });
     res.status(OK).json(lines);

@@ -48,7 +48,7 @@ export const getOperatorLine = async (req, res) => {
     
       const operators = users.map((user) => {
         let lines = listline.filter((line) => {
-          return line.user.toString()=== user._id.toString();        
+          return line.user?.toString()=== user._id.toString();        
         });      
         return {user, lines};
       })

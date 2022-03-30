@@ -39,10 +39,10 @@ Content-Type: application/json
 
 
 {
-    "lineNumber": 21,
-    "description": "line1",
-    "status": true,
-    "user":"6231ebaa5e8c5eff7fd807ba"
+    "lineNumber": "011",
+    "description": "Tuyến vũng tàu",
+    "status": true
+   
 }
 ###
 POST http://localhost:5000/api/lines/assignUser
@@ -69,3 +69,31 @@ GET http://localhost:5000/api/lines
 
 ###
 GET http://localhost:5000/api/transporters/getbyline/6232114cf7a0ffd6a4caabbb
+
+
+###
+GET http://localhost:5000/api/units
+
+
+
+###
+POST http://localhost:5000/api/units
+Content-Type: application/json
+
+{
+    "name":"Bảo Yến"
+}
+
+
+###
+GET http://localhost:5000/api/units/getAllUnitLine
+
+
+###
+POST http://localhost:5000/api/units/assignLine
+Content-Type: application/json
+
+{
+    "unitId":"624477ec811bf62af3b7cd32",
+    "lineId":"6241d6ec1ab53254da85fdeb"
+}
