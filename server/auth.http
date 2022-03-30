@@ -3,7 +3,8 @@ Content-Type: application/json
 
 
 {
-    "username": "Nhanvien1",
+    "username": "nhanvien3",
+    "name": "Thuận Anh",
     "password": "123456",
     "role": "OPERATOR"
 }
@@ -17,18 +18,20 @@ Content-Type: application/json
 
 {
     "username": "admin",
-    "password": "760412"
+    "password": "123456"
 }
 
 
 ###
-GET http://localhost:5000/api/auth/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjMxZWI3MDVlOGM1ZWZmN2ZkODA3YjQiLCJpYXQiOjE2NDc0Mzg4MDZ9.AoLMUJlzFwMLJdZ3Gkmp7V-z6fUr3YXCmuENlAZ8358
+GET http://localhost:5000/api/auth/getOperatorLine
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQzY2Q4MmM2M2NiNzliMzk2NTQ1ZGYiLCJpYXQiOjE2NDg2MTM3NjB9.RaTnLaEv16pCJ-8BPAP_XjHomVQCUipONz9VzQ9WAoc
 
 ###
 GET http://localhost:5000/api/auth/verify
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQxYzY4NmU3YTBjNWM5YTk3ZjdiNDgiLCJpYXQiOjE2NDg0Nzc4NzF9.v_gxLBXCSnZQLJxWlkq0qPe3T3q3QhH-dGwS7st72LAq
-
+###
+GET http://localhost:5000/api/auth/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjQzY2Q4MmM2M2NiNzliMzk2NTQ1ZGYiLCJpYXQiOjE2NDg2MTM3NjB9.RaTnLaEv16pCJ-8BPAP_XjHomVQCUipONz9VzQ9WAoc
 
 ###
 POST http://localhost:5000/api/lines
@@ -41,6 +44,19 @@ Content-Type: application/json
     "status": true,
     "user":"6231ebaa5e8c5eff7fd807ba"
 }
+###
+POST http://localhost:5000/api/lines/assignUser
+Content-Type: application/json
+
+
+{
+    "userId": "6243d695c63cb79b39654622",
+    "lineId": "6243f9557f0fa01c27807f62"
+}
+
+
+###
+GET http://localhost:5000/api/lines/getLineByKeyword/21
 
 
 ###

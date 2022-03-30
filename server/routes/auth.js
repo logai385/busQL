@@ -2,8 +2,13 @@ import express from "express";
 
 import verifyToken from "../middleware/auth.js";
 
-import  { getAllUser, verifyUser, login, register } from "../controllers/auth.js";
+import  { getAllUser, verifyUser, login, register, getOperatorLine } from "../controllers/auth.js";
 const router = express.Router();
+
+// @route GET api/lines
+// @desc Get all lines by user
+// @access Private
+router.get("/getOperatorLine", verifyToken, getOperatorLine);
 
 // @route GET api/auth/users
 // @desc verify token

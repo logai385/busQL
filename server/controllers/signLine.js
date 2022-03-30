@@ -1,5 +1,7 @@
 import { STATUS_CODE } from "../utils/systemSettings.js";
-
+import fs from "fs";
+import path from 'path';
+const __dirname = path.resolve();
 const {
   NO_CONTENT,
   OK,
@@ -35,10 +37,16 @@ export const deleteDocument = async (req, res) => {
     if (!deleteDocument) {
       return res.status(NOT_FOUND).json({ message: "Document not found" });
     }
-    return res.status(OK).json({ message: "Document deleted" });
+    res.status(OK).json({ message: "Document deleted" });
+    deleteDocument.documentImg.forEach((file) => {
+      fs.unlink(path.join(__dirname,`public/${file}`),(error)=>{
+        console.log(error)
+      });
+    });
+
   } catch (error) {
     console.error(error.message);
-    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 export const createDocument = async (req, res) => {

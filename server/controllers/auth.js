@@ -12,6 +12,7 @@ const {
 } = STATUS_CODE;
 const { ADMINISTRATOR, OPERATOR } = ROLE;
 import User from "../model/User.js";
+import Line from "../model/Line.js";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 export const getAllUser = async (req, res) => {
@@ -23,13 +24,42 @@ export const getAllUser = async (req, res) => {
       const users = await User.find({ role: role }).select("-password");
       if (!users)
         return res.status(NOT_FOUND).json({ message: "User not found" });
-      res.status(OK).json(users);
+        res.status(OK).json(users);
     } else {
       return res.status(UNAUTHORIZED).json({ message: "Access denied" });
     }
   } catch (error) {
     console.error(error.message);
     res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+  }
+};
+export const getOperatorLine = async (req, res) => {
+  try {
+    const admin = await User.findById(req.userId);
+    if (admin && admin.role === ADMINISTRATOR) {
+     
+      const role = OPERATOR;
+      const users = await User.find({ role: role }).select("-password -__v -role -createAt");
+      if (!users)
+        return res.status(NOT_FOUND).json({ message: "User not found" });
+      // console.log(listline);
+      // console.log(users);
+      const listline = await Line.find().select("-__v -description -status");
+    
+      const operators = users.map((user) => {
+        let lines = listline.filter((line) => {
+          return line.user.toString()=== user._id.toString();        
+        });      
+        return {user, lines};
+      })
+      res.status(OK).json(operators);
+      
+    } else {
+      return res.status(UNAUTHORIZED).json({ message: "Access denied" });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 export const verifyUser = async (req, res) => {
@@ -77,7 +107,7 @@ export const login = async (req, res) => {
   }
 };
 export const register = async (req, res) => {
-  const { username, password, role } = req.body;
+  const { username,name, password, role } = req.body;
   // Simple validation
   if (!username || !password) {
     return res
@@ -94,6 +124,7 @@ export const register = async (req, res) => {
     const hastPassword = await argon2.hash(password);
     const newUser = new User({
       username,
+      name,
       password: hastPassword,
       role: role || "OPERATOR",
     });

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ROLE } from "../utils/systemSettings.js";
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -7,6 +8,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
+    trim: true
   },
   name: {
     type: String,

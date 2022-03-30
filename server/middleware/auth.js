@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   
   if (!token)
     return res
-      .sendStatus(401)
+      .status(401)
       .json({ success: false, message: "Access denied. No token provided" });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
   } catch (err) {
     console.log(err);
     return res
-      .sendStatus(403)
+      .status(403)
       .json({ success: false, message: "Invalid token" });
   }
 };
