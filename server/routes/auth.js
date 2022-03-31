@@ -8,7 +8,7 @@ const router = express.Router();
 // @route GET api/lines
 // @desc Get all lines by user
 // @access Private
-router.get("/getOperatorLine", verifyToken, getOperatorLine);
+router.get("/getOperatorLine", getOperatorLine);
 
 // @route GET api/auth/users
 // @desc verify token

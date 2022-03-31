@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import { getAllDocument, deleteDocument, createDocument } from "../controllers/signLine.js";
 import path from 'path';
+import verifyToken from "../middleware/auth.js";
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -30,11 +31,11 @@ router.get("/", getAllDocument);
 // @route DELETE api/sign/documents/:id
 // @desc Delete a document
 // @access Public
-router.delete("/:id", deleteDocument);
+router.delete("/:id",verifyToken, deleteDocument);
 
 //@route POST api/sign/documents
 //@desc Create a new document
 //@access Public
-router.post("/", upload.array("documentImg"), createDocument);
+router.post("/",verifyToken, upload.array("documentImg"), createDocument);
 
 export default router;

@@ -35,8 +35,7 @@ export const getAllUser = async (req, res) => {
 };
 export const getOperatorLine = async (req, res) => {
   try {
-    const admin = await User.findById(req.userId);
-    if (admin && admin.role === ADMINISTRATOR) {
+   
      
       const role = OPERATOR;
       const users = await User.find({ role: role }).select("-password -__v -role -createAt");
@@ -44,7 +43,7 @@ export const getOperatorLine = async (req, res) => {
         return res.status(NOT_FOUND).json({ message: "User not found" });
       // console.log(listline);
       // console.log(users);
-      const listline = await Line.find().select("-__v -description -status");
+      const listline = await Line.find().select("-__v -status");
     
       const operators = users.map((user) => {
         let lines = listline.filter((line) => {
@@ -54,9 +53,7 @@ export const getOperatorLine = async (req, res) => {
       })
       res.status(OK).json(operators);
       
-    } else {
-      return res.status(UNAUTHORIZED).json({ message: "Access denied" });
-    }
+   
   } catch (error) {
     console.error(error.message);
     res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });

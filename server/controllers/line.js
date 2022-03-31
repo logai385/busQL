@@ -58,7 +58,7 @@ export const getAllLine = async (req, res) => {
 export const createLine = async (req, res) => {
   try {
     // Simple validation
-    const { lineNumber, description, status, user } = req.body;
+    const { lineNumber, description, status } = req.body;
     // Check if lineNumber already exists
     const lineExists = await Line.findOne({ lineNumber });
     if (lineExists) {
@@ -70,8 +70,7 @@ export const createLine = async (req, res) => {
     const newLine = new Line({
       lineNumber: lineNumber,
       description: description,
-      status: status,
-      user: user,
+      status: status,      
     });
     await newLine.save();
     res.status(CREATED).json(newLine);
@@ -82,7 +81,7 @@ export const createLine = async (req, res) => {
 };
 export const updateLine = async (req, res) => {
   try {
-    const { id, lineNumber, description, status, user } = req.body;
+    const { id, lineNumber, description, status } = req.body;
     //simple validation
 
     const lineExists = await Line.findOne({ lineNumber: lineNumber });
@@ -95,8 +94,7 @@ export const updateLine = async (req, res) => {
     let updateLine = {
       lineNumber: lineNumber,
       description: description,
-      status: status,
-      user: user,
+      status: status,      
     };
     updateLine = await Line.findOneAndUpdate({ _id: id }, updateLine, {
       new: true,
@@ -118,6 +116,21 @@ export const assignUser=async(req,res)=>{
     const user = await User.findById(userId)
     if (!user) return res.status(BAD_REQUEST).json({message:"user not found"})
     line.user = user._id;
+    await line.save();
+    res.status(OK).json(line);
+  }catch (error) {
+    console.log(error.message);
+    return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+}
+export const removeUser=async(req,res)=>{
+  const{userId, lineId} = req.body;
+  try{
+    const line = await Line.findById(lineId)
+    if (!line) return res.status(BAD_REQUEST).json({message:"line not found"})
+    const user = await User.findById(userId)
+    if (!user) return res.status(BAD_REQUEST).json({message:"user not found"})
+    line.user = null;
     await line.save();
     res.status(OK).json(line);
   }catch (error) {

@@ -3,8 +3,16 @@ const router = express.Router();
 
 import verifyToken from "../middleware/auth.js";
 
-import { getLineByUser, getAllLine, createLine, updateLine, deleteLine, getLineByKeyword,assignUser } from "../controllers/line.js";
-
+import {
+  getLineByUser,
+  getAllLine,
+  createLine,
+  updateLine,
+  deleteLine,
+  getLineByKeyword,
+  assignUser,
+  removeUser,
+} from "../controllers/line.js";
 
 // @route GET api/lines
 // @desc Get all lines by user
@@ -24,20 +32,21 @@ router.get("/", getAllLine);
 // @ route POST api/qlnv/line
 // @ desc Create a new line
 // @ access Public
-router.post("/", createLine);
+router.post("/", verifyToken, createLine);
 // @ route POST api/qlnv/line
 // @ desc Create a new line
 // @ access Public
-router.post("/assignUser", assignUser);
+router.post("/assignUser", verifyToken, assignUser);
+router.post("/removeUser", verifyToken, removeUser);
 
 // @route PUT api/qlnv/line
 // @desc Update a transporter
 // @access Public
-router.put("/", updateLine);
+router.put("/", verifyToken, updateLine);
 
 // @route DELETE api/qlnv/line
 // @desc Delete a line
 // @access Public
-router.delete("/:id", deleteLine);
+router.delete("/:id", verifyToken, deleteLine);
 
 export default router;

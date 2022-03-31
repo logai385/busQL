@@ -42,7 +42,7 @@ export const createUnit = async (req, res) => {
 export const getAllUnitLine = async (req, res) => {
   try {
     const listUnit = await Unit.find();
-    const listLine = await Line.find();  
+    const listLine = await Line.find();
     const unitLine = listUnit.map((unit) => {
       let lines = listLine.filter((line) => {
         return line.unit?.toString() === unit._id.toString();
@@ -76,6 +76,45 @@ export const assignLine = async (req, res) => {
 
     await line.save();
     return res.status(OK).json(line);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
+export const removeLine = async (req, res) => {
+  const { unitId, lineId } = req.body;
+  // Simple validation
+  if (!unitId || !lineId) {
+    return res
+      .status(BAD_REQUEST)
+      .json({ message: "unitId or lineId must not be empty" });
+  }
+  try {
+    const unit = await Unit.findById(unitId);
+    if (!unit) 
+      return res.status(NOT_FOUND).json({ message: "unit not found" });
+    
+    const line = await Line.findById(lineId);
+    if (!line) 
+      return res.status(NOT_FOUND).json({ message: "line not found" });
+    
+    line.unit = null;
+    await line.save();
+    return res.status(OK).json(line);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
+  }
+};
+export const deleteUnit = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const unit = Unit.findById(id);
+    if (!unit) return res.status(NOT_FOUND).json({ message: "unit not found" });
+
+    await unit.remove();
+
+    return res.status(OK).json({ message: "unit deleted" });
   } catch (error) {
     console.error(error.message);
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
