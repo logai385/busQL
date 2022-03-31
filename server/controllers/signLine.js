@@ -52,7 +52,7 @@ export const deleteDocument = async (req, res) => {
 export const createDocument = async (req, res) => {
   try {
     const documentImg = req.files?.map((file) => file.filename);
-    let { dateSign, transporter, line, quantity } = req.body;
+    let { dateSign, transporter, line, quantity,missQuantity } = req.body;
 
     //Simple validation
 
@@ -66,6 +66,7 @@ export const createDocument = async (req, res) => {
       transporter,
       line,
       quantity,
+      missQuantity,
       documentImg: documentImg,
     });
     await newDocument.save();

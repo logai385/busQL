@@ -10,6 +10,7 @@ import lineRoute from "./routes/line.js";
 import transporterRoute from "./routes/transporter.js";
 import signlineRoute from "./routes/signline.js";
 import unitRoute from "./routes/unit.js";
+import dashboardRoute from "./routes/dashboard.js";
 // connect to db
 const connectDB = async () => {
   try {
@@ -36,6 +37,7 @@ app.use("/api/lines", lineRoute);
 app.use("/api/transporters", transporterRoute);
 app.use("/api/documents", signlineRoute);
 app.use("/api/units", unitRoute);
+app.use("/api/dashboard", dashboardRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

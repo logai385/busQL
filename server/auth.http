@@ -97,3 +97,11 @@ Content-Type: application/json
     "unitId":"624477ec811bf62af3b7cd32",
     "lineId":"6241d6ec1ab53254da85fdeb"
 }
+
+###
+GET http://localhost:5000/api/dashboard/getQualityByUnit
+###
+GET http://localhost:5000/api/dashboard/getQualityUnitByDate/2022-03-01T00:00:00.000Z
+
+###
+GET http://localhost:5000/api/documents/
