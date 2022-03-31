@@ -101,7 +101,10 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/dashboard/getQualityByUnit
 ###
-GET http://localhost:5000/api/dashboard/getQualityUnitByDate/2022-03-01T00:00:00.000Z
+GET http://localhost:5000/api/dashboard/getQualityUnitByDate/2022-03-01
+
+###
+GET http://localhost:5000/api/dashboard/getQualityUnitMonth/3/2022
 
 ###
 GET http://localhost:5000/api/documents/

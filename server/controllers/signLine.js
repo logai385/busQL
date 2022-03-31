@@ -1,6 +1,6 @@
 import { STATUS_CODE } from "../utils/systemSettings.js";
 import fs from "fs";
-import path from 'path';
+import path from "path";
 const __dirname = path.resolve();
 const {
   NO_CONTENT,
@@ -39,11 +39,10 @@ export const deleteDocument = async (req, res) => {
     }
     res.status(OK).json({ message: "Document deleted" });
     deleteDocument.documentImg.forEach((file) => {
-      fs.unlink(path.join(__dirname,`public/${file}`),(error)=>{
-        console.log(error)
+      fs.unlink(path.join(__dirname, `public/${file}`), (error) => {
+        console.log(error);
       });
     });
-
   } catch (error) {
     console.error(error.message);
     res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
@@ -52,10 +51,9 @@ export const deleteDocument = async (req, res) => {
 export const createDocument = async (req, res) => {
   try {
     const documentImg = req.files?.map((file) => file.filename);
-    let { dateSign, transporter, line, quantity,missQuantity } = req.body;
+    let { dateSign, transporter, line, quantity, missQuantity } = req.body;
 
     //Simple validation
-
     if (!documentImg || !dateSign || !transporter || !line) {
       return res.status(BAD_REQUEST).json({
         message: "Please enter all fields",
