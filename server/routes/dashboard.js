@@ -1,10 +1,26 @@
 import express from "express";
-import { getQualityByUnit,getQualityUnitBydate,getQualityUnitMonth } from "../controllers/dashboard.js";
+import {
+  getQualityByUnit,
+  getQualityTransporterBydate,
+  getQualityLineMonth,
+  getQualityLineBydate,
+  getQualityUnitBydate,
+} from "../controllers/dashboard.js";
 const router = express.Router();
 // @ route POST api/dashboard/
 router.get("/getQualityByUnit", getQualityByUnit);
-router.get("/getQualityUnitBydate/:dateSign", getQualityUnitBydate);
-router.get("/getQualityUnitMonth/:month/:year", getQualityUnitMonth);
-
+router.get("/getQualityLineMonth/:month/:year", getQualityLineMonth);
+router.get(
+  "/getQualityTransporterBydate/:bus/:startDate/:endDate",
+  getQualityTransporterBydate
+);
+router.get(
+  "/getQualityLineBydate/:line/:startDate/:endDate",
+  getQualityLineBydate
+);
+router.get(
+  "/getQualityUnitBydate/:unit/:startDate/:endDate",
+  getQualityUnitBydate
+);
 
 export default router;

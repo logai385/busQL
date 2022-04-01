@@ -100,11 +100,20 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/dashboard/getQualityByUnit
-###
-GET http://localhost:5000/api/dashboard/getQualityUnitByDate/2022-03-01
 
 ###
 GET http://localhost:5000/api/dashboard/getQualityUnitMonth/3/2022
 
 ###
-GET http://localhost:5000/api/documents/
+GET http://localhost:5000/api/transporters/
+
+
+###
+GET http://localhost:5000/api/dashboard/getQualityTransporterBydate/624584bd88579d6dbb71f467/2021-01-01/2022-03-31
+
+
+###
+GET http://localhost:5000/api/dashboard/getQualityLineBydate/6241d6ec1ab53254da85fdeb/2021-01-01/2022-03-31
+
+###
+GET http://localhost:5000/api/dashboard/getQualityUnitBydate/624477f3811bf62af3b7cd35/2021-01-01/2022-04-17
