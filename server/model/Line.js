@@ -13,11 +13,7 @@ const LineSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
-  },
-  unit:{
-    type: Schema.Types.ObjectId,
-    ref: "TransporterUnit",
-  },
+  },  
   status: Boolean,
 });
 LineSchema.pre("remove", function (next) {

@@ -18,6 +18,10 @@ const TransporterSchema = new Schema({
       ref: "Line",
     },
   ],
+  unit:{
+    type: Schema.Types.ObjectId,
+    ref: "TransporterUnit",
+  },
 });
 TransporterSchema.pre('remove', function(next) {
   // 'this' is the client being removed. Provide callbacks here if you want

@@ -9,7 +9,7 @@ const {
   UNAUTHORIZED,
 } = STATUS_CODE;
 import Unit from "../model/TransporterUnit.js";
-import Line from "../model/Line.js";
+import Bus from "../model/Transporter.js";
 export const getAllUnit = async (req, res) => {
   try {
     const units = await Unit.find();
@@ -39,26 +39,26 @@ export const createUnit = async (req, res) => {
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
-export const getAllUnitLine = async (req, res) => {
+export const getAllUnitBus = async (req, res) => {
   try {
     const listUnit = await Unit.find();
-    const listLine = await Line.find();
-    const unitLine = listUnit.map((unit) => {
-      let lines = listLine.filter((line) => {
-        return line.unit?.toString() === unit._id.toString();
+    const listBus = await Line.find();
+    const unitBus = listUnit.map((unit) => {
+      let buses = listBus.filter((bus) => {
+        return bus.unit?.toString() === unit._id.toString();
       });
-      return { unit, lines };
+      return { unit, buses };
     });
-    res.status(OK).json(unitLine);
+    res.status(OK).json(unitBus);
   } catch (error) {
     console.error(error.message);
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
-export const assignLine = async (req, res) => {
-  const { unitId, lineId } = req.body;
+export const assignBus = async (req, res) => {
+  const { unitId, busId } = req.body;
   // Simple validation
-  if (!unitId || !lineId) {
+  if (!unitId || !busId) {
     return res
       .status(BAD_REQUEST)
       .json({ message: "unitId or lineId must not be empty" });
@@ -68,23 +68,23 @@ export const assignLine = async (req, res) => {
     if (!unit) {
       return res.status(NOT_FOUND).json({ message: "unit not found" });
     }
-    const line = await Line.findById(lineId);
+    const bus = await Bus.findById(busId);
     if (!line) {
       return res.status(NOT_FOUND).json({ message: "line not found" });
     }
-    line.unit = unitId;
+    bus.unit = unitId;
 
-    await line.save();
-    return res.status(OK).json(line);
+    await bus.save();
+    return res.status(OK).json(bus);
   } catch (error) {
     console.error(error.message);
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
-export const removeLine = async (req, res) => {
-  const { unitId, lineId } = req.body;
+export const removeBus = async (req, res) => {
+  const { unitId, busId } = req.body;
   // Simple validation
-  if (!unitId || !lineId) {
+  if (!unitId || !busId) {
     return res
       .status(BAD_REQUEST)
       .json({ message: "unitId or lineId must not be empty" });
@@ -94,13 +94,13 @@ export const removeLine = async (req, res) => {
     if (!unit) 
       return res.status(NOT_FOUND).json({ message: "unit not found" });
     
-    const line = await Line.findById(lineId);
-    if (!line) 
+    const bus = await bus.findById(busId);
+    if (!bus) 
       return res.status(NOT_FOUND).json({ message: "line not found" });
     
-    line.unit = null;
-    await line.save();
-    return res.status(OK).json(line);
+    bus.unit = null;
+    await bus.save();
+    return res.status(OK).json(bus);
   } catch (error) {
     console.error(error.message);
     return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });

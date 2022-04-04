@@ -2,10 +2,10 @@ import express from "express";
 import {
   getAllUnit,
   createUnit,
-  getAllUnitLine,
-  assignLine,
+  getAllUnitBus,
+  assignBus,
   deleteUnit,
-  removeLine,
+  removeBus,
 } from "../controllers/unit.js";
 const router = express.Router();
 import verifyToken from "../middleware/auth.js";
@@ -14,9 +14,9 @@ import verifyToken from "../middleware/auth.js";
 // @desc    Get all units
 // @access  Public
 router.get("/", getAllUnit);
-router.get("/getAllUnitLine", getAllUnitLine);
-router.post("/assignLine", verifyToken, assignLine);
-router.post("/removeLine", verifyToken, removeLine);
+router.get("/getAllUnitBus", getAllUnitBus);
+router.post("/assignBus", verifyToken, assignBus);
+router.post("/removeBus", verifyToken, removeBus);
 
 router.post("/", verifyToken, createUnit);
 router.delete("/:id", verifyToken, deleteUnit);
