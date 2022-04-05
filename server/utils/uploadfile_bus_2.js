@@ -32,12 +32,12 @@ async function insertRec(row) {
   try {
     
     const lines = await Line.find();
-    const units = await Unit.find({name:row.unit})
+    const unit = await Unit.findOne({name:row.unit});
 
     let mainLines_Str = row.mainLines.trim();
     const mainLines = [];
     if (mainLines_Str || mainLines_Str.length > 1) {
-      mainLines_Str = row.mainLines.split(",");
+      mainLines_Str = mainLines_Str.split("-");
 
       mainLines_Str.map((lineNumber) => {
         const line = lines.find((line) => {
@@ -50,7 +50,7 @@ async function insertRec(row) {
     let minorLines_Str = row.minorLines.trim();
     const minorLines = [];
     if (minorLines_Str || minorLines_Str.length > 1) {
-      minorLines_Str = row.mainLines.split(",");
+      minorLines_Str = minorLines_Str.split("-");
 
       minorLines_Str.map((lineNumber) => {
         const line = lines.find((line) => {
@@ -65,7 +65,7 @@ async function insertRec(row) {
       plate: row.plate,
       mainLines: mainLines,
       minorLines: minorLines,
-      unit:units[0]?.name
+      unit:unit?._id
     });
     await updatedTransporter.save();
   } catch (error) {
@@ -75,7 +75,7 @@ async function insertRec(row) {
 
 async function startRead() {
   const stream = fs
-    .createReadStream("./utils/DSBus_2.csv")
+    .createReadStream("./utils/DSBus_3.csv")
     .pipe(csv.parse({ headers: true }))
     .on("data", async (row) => {
       try {
@@ -87,6 +87,8 @@ async function startRead() {
     })
     .on("end", () => {
       console.log("CSV file successfully processed");
+      process.exit(1);
+
     });
 }
 startRead();

@@ -42,7 +42,7 @@ export const createUnit = async (req, res) => {
 export const getAllUnitBus = async (req, res) => {
   try {
     const listUnit = await Unit.find();
-    const listBus = await Line.find();
+    const listBus = await Bus.find();
     const unitBus = listUnit.map((unit) => {
       let buses = listBus.filter((bus) => {
         return bus.unit?.toString() === unit._id.toString();
@@ -61,7 +61,7 @@ export const assignBus = async (req, res) => {
   if (!unitId || !busId) {
     return res
       .status(BAD_REQUEST)
-      .json({ message: "unitId or lineId must not be empty" });
+      .json({ message: "unitId or busId must not be empty" });
   }
   try {
     const unit = await Unit.findById(unitId);
@@ -69,8 +69,8 @@ export const assignBus = async (req, res) => {
       return res.status(NOT_FOUND).json({ message: "unit not found" });
     }
     const bus = await Bus.findById(busId);
-    if (!line) {
-      return res.status(NOT_FOUND).json({ message: "line not found" });
+    if (!bus) {
+      return res.status(NOT_FOUND).json({ message: "bus not found" });
     }
     bus.unit = unitId;
 
@@ -87,7 +87,7 @@ export const removeBus = async (req, res) => {
   if (!unitId || !busId) {
     return res
       .status(BAD_REQUEST)
-      .json({ message: "unitId or lineId must not be empty" });
+      .json({ message: "unitId or busId must not be empty" });
   }
   try {
     const unit = await Unit.findById(unitId);
@@ -96,7 +96,7 @@ export const removeBus = async (req, res) => {
     
     const bus = await bus.findById(busId);
     if (!bus) 
-      return res.status(NOT_FOUND).json({ message: "line not found" });
+      return res.status(NOT_FOUND).json({ message: "bus not found" });
     
     bus.unit = null;
     await bus.save();

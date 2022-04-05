@@ -32,7 +32,7 @@ export const getAllTransporter = async (req, res) => {
     // get all transporters
     const transporters = await transporter
       .find()
-      .populate(["mainLines", "minorLines"]);
+      .populate(["mainLines", "minorLines","unit"]);
     res.status(OK).json(transporters);
   } catch (err) {
     console.error(err.message);
