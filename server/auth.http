@@ -107,6 +107,8 @@ GET http://localhost:5000/api/dashboard/getQualityUnitMonth/3/2022
 ###
 GET http://localhost:5000/api/transporters/
 
+###
+GET http://localhost:5000/api/transporters/getBusByKeyword/50
 
 ###
 GET http://localhost:5000/api/dashboard/getQualityTransporterBydate/624584bd88579d6dbb71f467/2021-01-01/2022-03-31

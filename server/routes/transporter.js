@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import verifyToken from "../middleware/auth.js";
 
-import { getAllTransporter, getTransporterByLine, createTranporter, deleteTransporter, updateTransporter } from "../controllers/transporter.js";
+import { getAllTransporter, getTransporterByLine, createTranporter, deleteTransporter, updateTransporter,getBusByKeyword } from "../controllers/transporter.js";
 
 // @route GET api/transporters
 // @desc Get all transporters
@@ -12,6 +12,7 @@ router.get("/getByLine/:lineId", getTransporterByLine);
 // @desc Get all transporters
 // @access Public
 router.get("/", getAllTransporter);
+router.get("/getBusByKeyword/:keyword?", getBusByKeyword);
 // @route POST api/transporters
 // @desc Create a new transporter
 // @access Public

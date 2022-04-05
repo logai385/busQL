@@ -113,26 +113,26 @@ export const getQualityUnitBydate = async (req, res) => {
   try {
     const { unit, startDate, endDate } = req.params;
     const unitName = await Unit.findById(unit);
-    const lines = await Line.find({ unit: new mongoose.Types.ObjectId(unit) });
-    const ids = lines.map((item) => item._id);
-
+    const buses = await Bus.find({ unit: new mongoose.Types.ObjectId(unit) });
+    const ids = buses.map((item) => item._id);    
     const match = {
       $and: [
         { dateSign: { $gte: new Date(startDate), $lte: new Date(endDate) } },
-        { line: { $in: ids } },
+        { transporter: { $in: ids } },
       ],
     };
     const group = {
-      _id: "$line",
+      _id: "$transporter",
       total: { $sum: "$quantity" },
       miss: { $sum: "$missQuantity" },
     };
     let rs = await Doc.aggregate([{ $match: match }, { $group: group }]);
-    rs = await Line.populate(rs, { path: "_id", select: "lineNumber" });
+    if (!rs||rs.length < 1) return res.status(200).json({});
+    rs = await Bus.populate(rs, { path: "_id", select: "plate" });
     rs = rs.map((item) => {
       return {
         id: item._id._id,
-        lineNumber: item._id.lineNumber,
+        plate: item._id.plate,
         total: item.total,
         miss: item.miss,
       };
@@ -142,7 +142,7 @@ export const getQualityUnitBydate = async (req, res) => {
       name: unitName.name,
       total: 0,
       miss: 0,
-      lines: rs,
+      buses: rs,
     };
     rs.map((item) => {
       data.total += item.total;

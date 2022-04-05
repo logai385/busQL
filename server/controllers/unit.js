@@ -94,7 +94,7 @@ export const removeBus = async (req, res) => {
     if (!unit) 
       return res.status(NOT_FOUND).json({ message: "unit not found" });
     
-    const bus = await bus.findById(busId);
+    const bus = await Bus.findById(busId);
     if (!bus) 
       return res.status(NOT_FOUND).json({ message: "bus not found" });
     

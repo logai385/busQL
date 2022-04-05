@@ -22,8 +22,7 @@ router.get("/getLineByUser", verifyToken, getLineByUser);
 // @route GET api/lines
 // @desc Get all lines
 // @access Public
-router.get("/getLineByKeyword/:keyword", getLineByKeyword);
-router.get("/getLineByKeyword/", getLineByKeyword);
+router.get("/getLineByKeyword/:keyword?", getLineByKeyword);
 // @route GET api/lines
 // @desc Get all lines
 // @access Public

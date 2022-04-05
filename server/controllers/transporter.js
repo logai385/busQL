@@ -32,7 +32,25 @@ export const getAllTransporter = async (req, res) => {
     // get all transporters
     const transporters = await transporter
       .find()
-      .populate(["mainLines", "minorLines","unit"]);
+      .populate(["mainLines", "minorLines", "unit"]);
+    res.status(OK).json(transporters);
+  } catch (err) {
+    console.error(err.message);
+    res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
+  }
+};
+export const getBusByKeyword = async (req, res) => {
+  const { keyword } = req.params;
+  try {
+    let transporters;
+    if (keyword) {
+      transporters = await transporter.find({
+        plate: { $regex: keyword },
+      });
+      return res.status(OK).json(transporters);
+    }
+    // get all transporters
+    transporters = await transporter.find();
     res.status(OK).json(transporters);
   } catch (err) {
     console.error(err.message);
@@ -106,6 +124,5 @@ export const updateTransporter = async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(INTERNAL_SERVER_ERROR).json({ message: err.message });
-
   }
 };
