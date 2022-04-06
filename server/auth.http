@@ -119,3 +119,9 @@ GET http://localhost:5000/api/dashboard/getQualityLineBydate/6241d6ec1ab53254da8
 
 ###
 GET http://localhost:5000/api/dashboard/getQualityUnitBydate/624477f3811bf62af3b7cd35/2021-01-01/2022-04-17
+
+
+
+
+###
+GET http://localhost:5000/api/documents/getDocumentByLine/line=624a6413c922b3d864f7d59d/startDate=2021-01-01/endDate=2022-04-17
