@@ -5,6 +5,7 @@ const TransporterSchema = new Schema({
   plate: {
     type: String,
     required: true,
+    unique: true,
   },
   mainLines: [
     {

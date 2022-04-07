@@ -75,7 +75,7 @@ async function insertRec(row) {
 
 async function startRead() {
   const stream = fs
-    .createReadStream("./utils/DSBus_3.csv")
+    .createReadStream("./utils/DSBUS.csv")
     .pipe(csv.parse({ headers: true }))
     .on("data", async (row) => {
       try {
