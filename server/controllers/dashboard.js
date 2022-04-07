@@ -49,7 +49,8 @@ export const getQualityLineMonth = async (req, res) => {
         miss: item.miss,
       };
     });
-    res.status(200).json(data);
+    
+    res.status(200).json(data.sort(function(a, b){return a.lineNumber.localeCompare(b.lineNumber)}));
   } catch (error) {}
 };
 export const getQualityTransporterBydate = async (req, res) => {
