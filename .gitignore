@@ -1,3 +1,5 @@
 server/node_modules
 request.http
 server/.env
+server/auth.http
+/.idea
