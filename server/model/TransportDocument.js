@@ -23,6 +23,10 @@ const TransportDocumentSchema = new Schema({
   documentImg:{
     type:[String],
   },
+  createAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 TransportDocumentSchema.index(
