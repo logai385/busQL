@@ -19,6 +19,37 @@ export const getQualityByUnit = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {}
 };
+export const getQualityAllLineByDate = async (req, res) => {
+  try {
+    const {startDate, endDate } = req.params;
+    const match = {
+         dateSign: { $gte: new Date(startDate), $lte: new Date(endDate) } ,    
+    };
+    const group = {
+      _id: "$line",
+      total: { $sum: "$quantity" },
+      miss: { $sum: "$missQuantity" },
+    };
+
+    let rs = await Doc.aggregate([
+      { $match: match },
+      { $group: group },
+    ]);
+    rs = await Line.populate(rs, { path: "_id", select: "lineNumber" });
+    if (!rs||rs.length < 1) return res.status(200).json([]);
+
+    const data = rs.map((item) => {
+      return {
+        id: item._id._id,
+        lineNumber: item._id.lineNumber,
+        total: item.total,
+        miss: item.miss,
+      };
+    });
+    
+    res.status(200).json(data.sort(function(a, b){return a.lineNumber.localeCompare(b.lineNumber)}));
+  } catch (error) {}
+};
 export const getQualityLineMonth = async (req, res) => {
   try {
     const { month, year } = req.params;
